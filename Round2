@@ -2,28 +2,28 @@
     "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.1",
     "parameters": {
-        "virtualMachines_MJH_CHI_VM01_name": {
-            "defaultValue": "MJH-CHI-VM01",
+        "virtualMachines_MJH_FRA_VM01_name": {
+            "defaultValue": "MJH-FRA-VM01",
             "type": "String"
         },
-        "networkInterfaces_MJH_CHI_VM01_name": {
-            "defaultValue": "MJH-CHI-VM01",
+        "networkInterfaces_MJH_FRA_VM01_name": {
+            "defaultValue": "MJH-FRA-VM01",
             "type": "String"
         },
-        "publicIPAddresses_MJH_CHI_IP01_name": {
-            "defaultValue": "MJH-CHI-IP01",
+        "publicIPAddresses_MJH_FRA_IP01_name": {
+            "defaultValue": "MJH-FRA-IP01",
             "type": "String"
         },
-        "virtualNetworks_MJH_CHI_VNET01_name": {
-            "defaultValue": "MJH-CHI-VNET01",
+        "virtualNetworks_MJH_FRA_VNET01_name": {
+            "defaultValue": "MJH-FRA-VNET01",
             "type": "String"
         },
-        "networkSecurityGroups_MJH_CHI_NSG01_name": {
-            "defaultValue": "MJH-CHI-NSG01",
+        "networkSecurityGroups_MJH_FRA_NSG01_name": {
+            "defaultValue": "MJH-FRA-NSG01",
             "type": "String"
         },
-        "schedules_shutdown_computevm_mjh_chi_vm01_name": {
-            "defaultValue": "shutdown-computevm-mjh-chi-vm01",
+        "schedules_shutdown_computevm_mjh_fra_vm01_name": {
+            "defaultValue": "shutdown-computevm-mjh-fra-vm01",
             "type": "String"
         }
     },
@@ -32,12 +32,12 @@
         {
             "type": "Microsoft.Network/networkSecurityGroups",
             "apiVersion": "2020-03-01",
-            "name": "[parameters('networkSecurityGroups_MJH_CHI_NSG01_name')]",
+            "name": "[parameters('networkSecurityGroups_MJH_FRA_NSG01_name')]",
             "location": "[resourceGroup().location]",
             "properties": {
                 "securityRules": [
                     {
-                        "name": "[concat(parameters('networkSecurityGroups_MJH_CHI_NSG01_name'), '80')]",
+                        "name": "[concat(parameters('networkSecurityGroups_MJH_FRA_NSG01_name'), '80')]",
                         "properties": {
                             "protocol": "Tcp",
                             "sourcePortRange": "*",
@@ -54,7 +54,7 @@
                         }
                     },
                     {
-                        "name": "[concat(parameters('networkSecurityGroups_MJH_CHI_NSG01_name'), '3389')]",
+                        "name": "[concat(parameters('networkSecurityGroups_MJH_FRA_NSG01_name'), '3389')]",
                         "properties": {
                             "protocol": "Tcp",
                             "sourcePortRange": "*",
@@ -76,7 +76,7 @@
         {
             "type": "Microsoft.Network/publicIPAddresses",
             "apiVersion": "2020-03-01",
-            "name": "[parameters('publicIPAddresses_MJH_CHI_IP01_name')]",
+            "name": "[parameters('publicIPAddresses_MJH_FRA_IP01_name')]",
             "location": "[resourceGroup().location]",
             "sku": {
                 "name": "Basic"
@@ -87,8 +87,8 @@
                 "publicIPAllocationMethod": "Static",
                 "idleTimeoutInMinutes": 4,
                 "dnsSettings": {
-                    "domainNameLabel": "mjh-chi-vm01-ca2c59",
-                    "fqdn": "mjh-chi-vm01-ca2c59.[resourceGroup().location].cloudapp.azure.com"
+                    "domainNameLabel": "mjh-fra-vm01-ca2c59",
+                    "fqdn": "mjh-fra-vm01-ca2c59.[resourceGroup().location].cloudapp.azure.com"
                 },
                 "ipTags": []
             }
@@ -96,7 +96,7 @@
         {
             "type": "Microsoft.Network/virtualNetworks",
             "apiVersion": "2020-03-01",
-            "name": "[parameters('virtualNetworks_MJH_CHI_VNET01_name')]",
+            "name": "[parameters('virtualNetworks_MJH_FRA_VNET01_name')]",
             "location": "[resourceGroup().location]",
             "properties": {
                 "addressSpace": {
@@ -123,10 +123,10 @@
         {
             "type": "Microsoft.Compute/virtualMachines",
             "apiVersion": "2019-07-01",
-            "name": "[parameters('virtualMachines_MJH_CHI_VM01_name')]",
+            "name": "[parameters('virtualMachines_MJH_FRA_VM01_name')]",
             "location": "[resourceGroup().location]",
             "dependsOn": [
-                "[resourceId('Microsoft.Network/networkInterfaces', parameters('networkInterfaces_MJH_CHI_VM01_name'))]"
+                "[resourceId('Microsoft.Network/networkInterfaces', parameters('networkInterfaces_MJH_FRA_VM01_name'))]"
             ],
             "properties": {
                 "hardwareProfile": {
@@ -141,7 +141,7 @@
                     },
                     "osDisk": {
                         "osType": "Windows",
-                        "name": "[concat(parameters('virtualMachines_MJH_CHI_VM01_name'), '_disk1_d7d6f45496d74addb48231ea70aa6f0f')]",
+                        "name": "[concat(parameters('virtualMachines_MJH_FRA_VM01_name'), '_disk1_d7d6f45496d74addb48231ea70aa6f0f')]",
                         "createOption": "FromImage",
                         "caching": "ReadWrite",
                         "managedDisk": {
@@ -152,7 +152,7 @@
                     "dataDisks": []
                 },
                 "osProfile": {
-                    "computerName": "[parameters('virtualMachines_MJH_CHI_VM01_name')]",
+                    "computerName": "[parameters('virtualMachines_MJH_FRA_VM01_name')]",
                     "adminUsername": "jhill",
                     "adminPassword": "quenada1",
                     "windowsConfiguration": {
@@ -166,7 +166,7 @@
                 "networkProfile": {
                     "networkInterfaces": [
                         {
-                            "id": "[resourceId('Microsoft.Network/networkInterfaces', parameters('networkInterfaces_MJH_CHI_VM01_name'))]"
+                            "id": "[resourceId('Microsoft.Network/networkInterfaces', parameters('networkInterfaces_MJH_FRA_VM01_name'))]"
                         }
                     ]
                 },
@@ -181,10 +181,10 @@
         {
             "type": "microsoft.devtestlab/schedules",
             "apiVersion": "2018-09-15",
-            "name": "[parameters('schedules_shutdown_computevm_mjh_chi_vm01_name')]",
+            "name": "[parameters('schedules_shutdown_computevm_mjh_fra_vm01_name')]",
             "location": "[resourceGroup().location]",
             "dependsOn": [
-                "[resourceId('Microsoft.Compute/virtualMachines', parameters('virtualMachines_MJH_CHI_VM01_name'))]"
+                "[resourceId('Microsoft.Compute/virtualMachines', parameters('virtualMachines_MJH_FRA_VM01_name'))]"
             ],
             "properties": {
                 "status": "Enabled",
@@ -199,15 +199,15 @@
                     "emailRecipient": "jhill777@hotmail.com",
                     "notificationLocale": "en"
                 },
-                "targetResourceId": "[resourceId('Microsoft.Compute/virtualMachines', parameters('virtualMachines_MJH_CHI_VM01_name'))]"
+                "targetResourceId": "[resourceId('Microsoft.Compute/virtualMachines', parameters('virtualMachines_MJH_FRA_VM01_name'))]"
             }
         },
         {
             "type": "Microsoft.Network/networkSecurityGroups/securityRules",
             "apiVersion": "2020-03-01",
-            "name": "[concat(parameters('networkSecurityGroups_MJH_CHI_NSG01_name'), '/', parameters('networkSecurityGroups_MJH_CHI_NSG01_name'), '3389')]",
+            "name": "[concat(parameters('networkSecurityGroups_MJH_FRA_NSG01_name'), '/', parameters('networkSecurityGroups_MJH_FRA_NSG01_name'), '3389')]",
             "dependsOn": [
-                "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_MJH_CHI_NSG01_name'))]"
+                "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_MJH_FRA_NSG01_name'))]"
             ],
             "properties": {
                 "protocol": "Tcp",
@@ -227,9 +227,9 @@
         {
             "type": "Microsoft.Network/networkSecurityGroups/securityRules",
             "apiVersion": "2020-03-01",
-            "name": "[concat(parameters('networkSecurityGroups_MJH_CHI_NSG01_name'), '/', parameters('networkSecurityGroups_MJH_CHI_NSG01_name'), '80')]",
+            "name": "[concat(parameters('networkSecurityGroups_MJH_CHI_NSG01_name'), '/', parameters('networkSecurityGroups_MJH_FRA_NSG01_name'), '80')]",
             "dependsOn": [
-                "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_MJH_CHI_NSG01_name'))]"
+                "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_MJH_FRA_NSG01_name'))]"
             ],
             "properties": {
                 "protocol": "Tcp",
@@ -249,9 +249,9 @@
         {
             "type": "Microsoft.Network/virtualNetworks/subnets",
             "apiVersion": "2020-03-01",
-            "name": "[concat(parameters('virtualNetworks_MJH_CHI_VNET01_name'), '/default')]",
+            "name": "[concat(parameters('virtualNetworks_MJH_FRA_VNET01_name'), '/default')]",
             "dependsOn": [
-                "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworks_MJH_CHI_VNET01_name'))]"
+                "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworks_MJH_FRA_VNET01_name'))]"
             ],
             "properties": {
                 "addressPrefix": "192.168.1.0/24",
@@ -263,25 +263,25 @@
         {
             "type": "Microsoft.Network/networkInterfaces",
             "apiVersion": "2020-03-01",
-            "name": "[parameters('networkInterfaces_MJH_CHI_VM01_name')]",
+            "name": "[parameters('networkInterfaces_MJH_FRA_VM01_name')]",
             "location": "[resourceGroup().location]",
             "dependsOn": [
-                "[resourceId('Microsoft.Network/publicIPAddresses', parameters('publicIPAddresses_MJH_CHI_IP01_name'))]",
-                "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworks_MJH_CHI_VNET01_name'), 'default')]",
-                "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_MJH_CHI_NSG01_name'))]"
+                "[resourceId('Microsoft.Network/publicIPAddresses', parameters('publicIPAddresses_MJH_FRA_IP01_name'))]",
+                "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworks_MJH_FRA_VNET01_name'), 'default')]",
+                "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_MJH_FRA_NSG01_name'))]"
             ],
             "properties": {
                 "ipConfigurations": [
                     {
-                        "name": "[parameters('networkInterfaces_MJH_CHI_VM01_name')]",
+                        "name": "[parameters('networkInterfaces_MJH_FRA_VM01_name')]",
                         "properties": {
                             "privateIPAddress": "192.168.1.4",
                             "privateIPAllocationMethod": "Dynamic",
                             "publicIPAddress": {
-                                "id": "[resourceId('Microsoft.Network/publicIPAddresses', parameters('publicIPAddresses_MJH_CHI_IP01_name'))]"
+                                "id": "[resourceId('Microsoft.Network/publicIPAddresses', parameters('publicIPAddresses_MJH_FRA_IP01_name'))]"
                             },
                             "subnet": {
-                                "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworks_MJH_CHI_VNET01_name'), 'default')]"
+                                "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworks_MJH_FRA_VNET01_name'), 'default')]"
                             },
                             "primary": true,
                             "privateIPAddressVersion": "IPv4"
@@ -294,7 +294,7 @@
                 "enableAcceleratedNetworking": false,
                 "enableIPForwarding": false,
                 "networkSecurityGroup": {
-                    "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_MJH_CHI_NSG01_name'))]"
+                    "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_MJH_FRA_NSG01_name'))]"
                 }
             }
         }
