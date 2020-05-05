@@ -173,7 +173,7 @@
                 "diagnosticsProfile": {
                     "bootDiagnostics": {
                         "enabled": true,
-                        "storageUri": "https://mjhchisa01.blob.core.windows.net/"
+                        "storageUri": "https://mjhfrasa01.blob.core.windows.net/"
                     }
                 }
             }
