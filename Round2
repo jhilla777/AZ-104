@@ -227,7 +227,7 @@
         {
             "type": "Microsoft.Network/networkSecurityGroups/securityRules",
             "apiVersion": "2020-03-01",
-            "name": "[concat(parameters('networkSecurityGroups_MJH_CHI_NSG01_name'), '/', parameters('networkSecurityGroups_MJH_FRA_NSG01_name'), '80')]",
+            "name": "[concat(parameters('networkSecurityGroups_MJH_FRA_NSG01_name'), '/', parameters('networkSecurityGroups_MJH_FRA_NSG01_name'), '80')]",
             "dependsOn": [
                 "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_MJH_FRA_NSG01_name'))]"
             ],
