@@ -154,7 +154,7 @@
                 "osProfile": {
                     "computerName": "[parameters('virtualMachines_MJH_FRA_VM01_name')]",
                     "adminUsername": "jhill",
-                    "adminPassword": "quenada1",
+                    "adminPassword": "nN<6+u'<PQ@d,zq%",
                     "windowsConfiguration": {
                         "provisionVMAgent": true,
                         "enableAutomaticUpdates": true
